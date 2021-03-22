@@ -10,14 +10,16 @@ using WMPLib;
 
 namespace AppTimer
 {
-    public partial class Form1 : Form
+    public partial class MainWindow : Form
     {
         private int hours = 4;
         private TimeSpan countDownTime;
         private List<string> localTodoArr;
-        static WMPLib.WindowsMediaPlayer Player;
-        private string songPath;
-        private string databasePath;
+        public WMPLib.WindowsMediaPlayer Player;
+        public string songPath;
+        public string databasePath;
+        private static VolumeControl volumeForm;
+ 
         // Create your POCO class entity
         public class Settings
         {
@@ -27,10 +29,12 @@ namespace AppTimer
             public string musicPath { get; set; }
         }
 
-        public Form1()
+        public MainWindow()
         {
             InitializeComponent();
+            
             Player = new WMPLib.WindowsMediaPlayer();
+            volumeForm = new VolumeControl(Player);
             localTodoArr = new List<String>();
             initDatabase();
         }
@@ -451,39 +455,15 @@ namespace AppTimer
                 || musicFileName.Contains(".flac") || musicFileName.Contains(".m3u");
         }
 
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        private void volumeChangeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Player.settings.volume = 100;
-        }
-
-        private void toolStripMenuItem3_Click(object sender, EventArgs e)
-        {
-            Player.settings.volume = 75;
-        }
-
-        private void toolStripMenuItem4_Click(object sender, EventArgs e)
-        {
-            Player.settings.volume = 50;
-        }
-
-        private void toolStripMenuItem5_Click(object sender, EventArgs e)
-        {
-            Player.settings.volume = 25;
-        }
-
-        private void toolStripMenuItem6_Click(object sender, EventArgs e)
-        {
-            Player.settings.volume = 10;
-        }
-
-        private void toolStripMenuItem7_Click(object sender, EventArgs e)
-        {
-            Player.settings.volume = 5;
-        }
-
-        private void toolStripMenuItem8_Click(object sender, EventArgs e)
-        {
-            Player.settings.volume = 2;
+            volumeForm.Visible = true;
+            //volumeForm.Location = volumeForm.RestoreBounds.Location;
+            Point p = MousePosition;
+            p.Y -= volumeForm.Height;
+            volumeForm.Location = p;
+            volumeForm.TopLevel = true;
+            volumeForm.Show();
         }
     }
 }

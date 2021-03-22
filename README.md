@@ -14,3 +14,4 @@ Click on AppTimer.exe in the root folder.
 * .NET 4.5+
 * Interop.WMPLib.dll, LiteDB.dll,MyData.db are all in the same folder as Apptimer.exe
 ![](./doc/Sample.png)
+

@@ -13,18 +13,30 @@ namespace AppTimer
     public partial class VolumeControl : Form
     {
         static WMPLib.WindowsMediaPlayer mediaPlayer;
-        public VolumeControl(WMPLib.WindowsMediaPlayer p)
+        private int volume;
+        public VolumeControl(WMPLib.WindowsMediaPlayer p,int _volume)
         {
             InitializeComponent();
             VolumeControl.mediaPlayer = p;
             this.Width = 69;
             this.Visible = false;
+            volume = _volume;
+            volumeTrackBar.Value = volume / 5;
+        }
+
+        public int getVolume()
+        {
+            return volume;
         }
 
         private void trackBar1_ValueChanged(object sender, EventArgs e)
         {
             if (VolumeControl.mediaPlayer != null && volumeTrackBar != null)
-                VolumeControl.mediaPlayer.settings.volume = volumeTrackBar.Value * 5;
+            {
+                volume = volumeTrackBar.Value * 5;
+                VolumeControl.mediaPlayer.settings.volume = volume;
+            }
+                
         }
 
         private void volumeTrackBar_MouseLeave(object sender, EventArgs e)

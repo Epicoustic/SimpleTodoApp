@@ -19,7 +19,7 @@ namespace AppTimer
         public string songPath;
         public string databasePath;
         private static VolumeControl volumeForm;
- 
+        private int currentVolume = 20;
         // Create your POCO class entity
         public class Settings
         {
@@ -34,7 +34,7 @@ namespace AppTimer
             InitializeComponent();
             
             Player = new WMPLib.WindowsMediaPlayer();
-            volumeForm = new VolumeControl(Player);
+            volumeForm = new VolumeControl(Player,currentVolume);
             localTodoArr = new List<String>();
             initDatabase();
         }
@@ -406,8 +406,8 @@ namespace AppTimer
                 new WMPLib._WMPOCXEvents_MediaErrorEventHandler(Player_MediaError);
             Player.URL = url;
             Player.settings.setMode("loop", true);
+            Player.settings.volume = volumeForm.getVolume();
             Player.controls.play();
-            Player.settings.volume = 20;
         }
 
         private void Player_PlayStateChange(int NewState)

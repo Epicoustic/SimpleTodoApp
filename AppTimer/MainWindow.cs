@@ -7,6 +7,7 @@ using LiteDB;
 using System.Linq;
 using System.Media;
 using WMPLib;
+using System.Diagnostics;
 
 namespace AppTimer
 {
@@ -32,7 +33,7 @@ namespace AppTimer
         public MainWindow()
         {
             InitializeComponent();
-            
+            this.Activated += MainWindow_Activated;
             Player = new WMPLib.WindowsMediaPlayer();
             volumeForm = new VolumeControl(Player,currentVolume);
             localTodoArr = new List<String>();
@@ -464,6 +465,15 @@ namespace AppTimer
             volumeForm.Location = p;
             volumeForm.TopLevel = true;
             volumeForm.Show();
+        }
+
+        private void MainWindow_Activated(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.BringToFront();
+                this.Show();
+            }
         }
     }
 }

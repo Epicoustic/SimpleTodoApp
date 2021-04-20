@@ -345,6 +345,7 @@ namespace AppTimer
             this.Name = "MainWindow";
             this.Text = "Work Tracker";
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
+            this.Activated += new System.EventHandler(this.MainWindow_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.AppTimer_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);

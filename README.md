@@ -11,7 +11,7 @@ Intentionally only has support for 3 todo items and no audio controls. The inten
 Click on AppTimer.exe in the root folder.
 ### Prerequisite
 * Windows Media Player
-* .NET 4.5+
+* .NET 4.7.2+
 * Interop.WMPLib.dll, LiteDB.dll, MyData.db are all in the same folder as Apptimer.exe
 ![](./doc/Sample.png)
 
